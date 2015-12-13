@@ -276,10 +276,11 @@ function dptest.SentenceSet()
 end 
 
 function dptest.DataSource()
+   if true then return end -- TODO
    local input = torch.randn(3,4,5,6)
    local target = torch.randn(3)
    local inputView = dp.ImageView('bchw', input)
-   local targetView = dp.TargetView('b', target)
+   local targetView = dp.ClassView('b', target)
    local valid = dp.DataSet{which_set='valid', inputs=input, targets=target}
    local ds = dp.DataSource{valid_set=valid}
    -- test ioShape
@@ -1099,6 +1100,29 @@ function dptest.TopCrop()
    mytester:assert(math.round(report.topcrop.all[3]) == 50, "topcrop all 3 error")
    mytester:assert(math.round(report.topcrop.center[1]) == 33, "topcrop center 1 error")
    mytester:assert(math.round(report.topcrop.center[3]) == 50, "topcrop center 3 error")
+end
+
+function dptest.HyperLog()
+   local hlog = dp.HyperLog()
+   local reports = {}
+   for i=1,3 do
+      local report = {
+         lr = 0.0001,
+         epoch = i,
+         feedback = {
+            confusion = {
+               accuracy = 3*i
+            }
+         }
+      }
+      table.insert(reports, report)
+      hlog:doneEpoch(report)
+      hlog:errorMinima(i==2, {minima=function() return 9, 2 end})
+   end
+   local accs = hlog:getResultByEpoch("feedback:confusion:accuracy")
+   local acc = hlog:getResultAtMinima("feedback:confusion:accuracy")
+   mytester:assertTableEq(accs, {3,6,9}, 0.0000001, "HyperLog getResultByEpoch err")
+   mytester:assert(acc == 6, "HyperLog getResultByMinima err")
 end
 
 function dp.test(tests)

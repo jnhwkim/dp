@@ -31,6 +31,8 @@ The [Language Model tutorial](languagemodeltutorial.md) examines the implementat
 
 In the [Data tutorial](datatutorial.md), we explore different ways to wrap your own data into a DataSource so that it may be used with dp.
 
+A brief (1 hours) overview of Torch7, which includes some details about __dp__, is available via this [NVIDIA GTC Webinar video](http://on-demand.gputechconf.com/gtc/2015/webinar/torch7-applied-deep-learning-for-vision-natural-language.mp4). In any case, this presentation gives a nice overview of Logistic Regression, Multi-Layer Perceptrons, Convolutional Neural Networks and Recurrent Neural Networks using Torch7.
+
 <a name="dp.packages"/>
 []()
 ## dp Packages ##
@@ -53,26 +55,30 @@ In the [Data tutorial](datatutorial.md), we explore different ways to wrap your 
 <a name="dp.install"/>
 []()
 ## Install ##
-To use this library, install it globally via luarocks:
+To use this library, install it via luarocks:
 ```shell
-$> sudo luarocks install dp
-```
-or install it locally:
-```shell
-$> luarocks install dp --local
+$> luarocks install dp
 ```
 or clone and make it (recommended):
 ```shell
 $> git clone git@github.com:nicholas-leonard/dp.git
 $> cd dp
-$> sudo luarocks make rocks/dp-scm-1.rockspec 
+$> luarocks make rocks/dp-scm-1.rockspec 
 ```
 
 ### Optional Dependencies ###
+
 For CUDA:
 ```shell
 $> sudo luarocks install cunnx
 ```
+
+## Other packages 
+
+These are some related package :
+ 
+  * [rnn](https://github.com/Element-Research/rnn) : Recurrent neural network library ;
+  * [hypero](https://github.com/Element-Research/hypero) : Simple distributed hyper-optimization library.
 
 ## Contributions ##
 

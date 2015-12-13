@@ -18,7 +18,8 @@ function FileLogger:setup(config)
    self._save_dir = paths.concat(self._save_dir, subject_path)
    self._log_dir = paths.concat(self._save_dir, 'log')
    --creates directories if required
-   os.execute('mkdir -p ' .. self._log_dir)
+   paths.mkdir(self._log_dir)
+   assert(paths.dirp(self._log_dir), "Log wasn't created : "..self._log_dir)
    dp.vprint(self._verbose, "FileLogger: log will be written to " .. self._log_dir)
 end
 
@@ -29,9 +30,4 @@ function FileLogger:doneEpoch(report)
    torch.save(filename, report)
    filename = paths.concat(self._log_dir, 'metadata.dat')
    torch.save(filename, self._last_epoch)
-end
-
-function FileLogger:logHyperReport(hyper_report)
-   local filename = paths.concat(self._log_dir, 'hyper_report.dat')
-   torch.save(filename, hyper_report)
 end

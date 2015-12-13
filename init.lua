@@ -65,7 +65,6 @@ torch.include('dp', 'data/textset.lua')
 torch.include('dp', 'data/imageclassset.lua')
 torch.include('dp', 'data/batch.lua')
 
-
 --[[ datasource ]]--
 -- generic datasources
 torch.include('dp', 'data/datasource.lua')
@@ -81,6 +80,7 @@ torch.include('dp', 'data/facialkeypoints.lua')
 torch.include('dp', 'data/svhn.lua')
 torch.include('dp', 'data/imagenet.lua')
 torch.include('dp', 'data/facedetection.lua')
+torch.include('dp', 'data/translatedmnist.lua')
 -- specific text datasources
 torch.include('dp', 'data/billionwords.lua')
 torch.include('dp', 'data/penntreebank.lua')
@@ -126,6 +126,7 @@ torch.include('dp', 'observer/earlystopper.lua')
 torch.include('dp', 'observer/savetofile.lua') --not an observer (but used in one)
 torch.include('dp', 'observer/adaptivedecay.lua')
 torch.include('dp', 'observer/filelogger.lua')
+torch.include('dp', 'observer/hyperlog.lua')
 
 --[[ nn ]]--
 torch.include('dp', 'nn/Print.lua')
